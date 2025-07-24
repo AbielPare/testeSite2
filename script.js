@@ -21,14 +21,3 @@ function atualizarContador() {
 }
 setInterval(atualizarContador, 1000);
 atualizarContador();
-
-// Corações animados
-function criarCoracao() {
-  const coracao = document.createElement('div');
-  coracao.classList.add('coracao'); // Corrigido o nome
-  coracao.style.left = Math.random() * 100 + 'vw';
-  coracao.textContent = '❤️';
-  document.getElementById('coracoes').appendChild(coracao);
-  setTimeout(() => coracao.remove(), 6000);
-}
-setInterval(criarCoracao, 300);
