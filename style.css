@@ -1,0 +1,130 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background: #0c1445;
+  color: white;
+  overflow: hidden;
+}
+
+.tela-inicial, .tela-conteudo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.titulo {
+  font-size: 2em;
+  margin-bottom: 40px;
+}
+
+.btn-click {
+  background: transparent;
+  color: white;
+  border: 2px solid #67d3f5;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 12px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s;
+}
+
+.btn-click:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.player iframe {
+  height: 200px !important;
+}
+
+.carousel {
+  width: 350px;
+  height: 500px;
+  margin: 20px 0;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.linha{
+  width: 100%;
+  border: none;
+  border-top: 2px solid #ffffff60; /* cor branca semi-transparente */
+  margin-top: 10px;
+}
+
+
+/* Corações */
+.coracoes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.coracao {
+  position: absolute;
+  color: #ff6b81;
+  font-size: 20px;
+  animation: cair 6s linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes cair {
+  0% {
+    transform: translateY(-10%) scale(1);
+  }
+  100% {
+    transform: translateY(100vh) scale(1.2);
+  }
+}
+
+
+
+@media (max-width: 600px) {
+  .carousel {
+    width: 90%;
+    height: auto;
+  }
+
+  .carousel img {
+    height: auto;
+  }
+
+  .contador, .mensagem {
+    font-size: 0.95em;
+    padding: 10px;
+  }
+
+  .btn-click {
+    font-size: 1em;
+    padding: 12px 20px;
+  }
+
+  .titulo {
+    font-size: 1.6em;
+  }
+}
