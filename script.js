@@ -1,32 +1,58 @@
-// Carrossel
-const fotos = ['biju.jpg', 'biju2.jpg', 'biju3.jpg', 'biju4.jpg'];
-let indexFoto = 0;
-const imagem = document.getElementById('imagemCarrossel');
-const prevBtn = document.getElementById('prevFoto');
-const nextBtn = document.getElementById('nextFoto');
 
-prevBtn.addEventListener('click', () => {
-  indexFoto = (indexFoto - 1 + fotos.length) % fotos.length;
-  imagem.src = fotos[indexFoto];
-});
+const imagens = ['biju.jpg', 'biju2.jpg', 'biju3.jpg', 'biju4.jpg'];
+let indice = 0;
 
-nextBtn.addEventListener('click', () => {
-  indexFoto = (indexFoto + 1) % fotos.length;
-  imagem.src = fotos[indexFoto];
-});
+document.getElementById('anterior').onclick = () => {
+  indice = (indice - 1 + imagens.length) % imagens.length;
+  document.getElementById('imagem-carrossel').src = imagens[indice];
+};
 
-// Contador
-const dataInicio = new Date('2024-03-12T00:00:00');
-const tempoEl = document.getElementById('tempoAmor');
+document.getElementById('proximo').onclick = () => {
+  indice = (indice + 1) % imagens.length;
+  document.getElementById('imagem-carrossel').src = imagens[indice];
+};
 
-function atualizarContador() {
+function atualizarTempo() {
+  const inicio = new Date("2024-03-12T00:00:00");
   const agora = new Date();
-  const diff = agora - dataInicio;
+  const diff = agora - inicio;
+
   const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutos = Math.floor((diff / (1000 * 60)) % 60);
-  const segundos = Math.floor((diff / 1000) % 60);
-  tempoEl.textContent = `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+  const horas = agora.getHours();
+  const minutos = agora.getMinutes();
+  const segundos = agora.getSeconds();
+
+  document.getElementById('tempo').textContent = `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
 }
-setInterval(atualizarContador, 1000);
-atualizarContador();
+setInterval(atualizarTempo, 1000);
+atualizarTempo();
+
+let dataAtual = new Date();
+const mesAno = document.getElementById('mesAno');
+const calendario = document.getElementById('calendario');
+
+function renderizarCalendario() {
+  calendario.innerHTML = "";
+  const ano = dataAtual.getFullYear();
+  const mes = dataAtual.getMonth();
+  const primeiroDia = new Date(ano, mes, 1).getDay();
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+
+  mesAno.textContent = `${dataAtual.toLocaleString('default', { month: 'long' })} ${ano}`;
+
+  for (let i = 0; i < primeiroDia; i++) {
+    calendario.innerHTML += "<div></div>";
+  }
+
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const marcado = dia === 12 ? "marcado" : "";
+    calendario.innerHTML += `<div class="${marcado}">${dia}</div>`;
+  }
+}
+
+function mudarMes(direcao) {
+  dataAtual.setMonth(dataAtual.getMonth() + direcao);
+  renderizarCalendario();
+}
+
+renderizarCalendario();
