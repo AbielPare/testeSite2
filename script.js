@@ -1,10 +1,19 @@
+// Carrossel
 const fotos = ['biju.jpg', 'biju2.jpg', 'biju3.jpg', 'biju4.jpg'];
 let indexFoto = 0;
 const imagem = document.getElementById('imagemCarrossel');
-setInterval(() => {
+const prevBtn = document.getElementById('prevFoto');
+const nextBtn = document.getElementById('nextFoto');
+
+prevBtn.addEventListener('click', () => {
+  indexFoto = (indexFoto - 1 + fotos.length) % fotos.length;
+  imagem.src = fotos[indexFoto];
+});
+
+nextBtn.addEventListener('click', () => {
   indexFoto = (indexFoto + 1) % fotos.length;
   imagem.src = fotos[indexFoto];
-}, 2000);
+});
 
 // Contador
 const dataInicio = new Date('2024-03-12T00:00:00');
